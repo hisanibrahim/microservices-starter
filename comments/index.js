@@ -37,6 +37,11 @@ app.post("/posts/:postId/comments", async (req, res) => {
   res.status(201).send(comments);
 });
 
+app.post("/events", (req, res) => {
+  console.log("Event recieved ", req.body.type);
+  res.send({});
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`Listening on ${process.env.PORT}`);
 });
