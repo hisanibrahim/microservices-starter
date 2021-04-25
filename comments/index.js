@@ -1,6 +1,7 @@
 const express = require("express");
 const { randomBytes } = require("crypto");
 const cors = require("cors");
+const axios = require("axios");
 
 const app = express();
 
@@ -13,19 +14,29 @@ app.get("/posts/:postId/comments", (req, res) => {
   res.send(commentsByPostId[req.params.postId] || []);
 });
 
-app.post("/posts/:postId/comments", (req, res) => {
+app.post("/posts/:postId/comments", async (req, res) => {
   const commentId = randomBytes(4).toString("hex");
   const { content } = req.body;
+  const { postId } = req.params;
 
-  const comments = commentsByPostId[req.params.postId] || [];
+  const comments = commentsByPostId[postId] || [];
 
   comments.push({ id: commentId, content });
 
-  commentsByPostId[req.params.postId] = comments;
+  commentsByPostId[postId] = comments;
+
+  await axios.post("http://localhost:4005/events", {
+    type: "CommentCreated",
+    data: {
+      id: commentId,
+      content,
+      postId,
+    },
+  });
 
   res.status(201).send(comments);
 });
 
-app.listen(4001, () => {
-  console.log("Listening on 4001");
+app.listen(process.env.PORT, () => {
+  console.log(`Listening on ${process.env.PORT}`);
 });
