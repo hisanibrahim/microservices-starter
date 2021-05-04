@@ -5,11 +5,15 @@ export default ({ postId }) => {
   const [content, setContent] = useState("");
 
   const onSubmit = async (event) => {
-    event.preventDefault();
-    await axios.post(`http://localhost:4001/posts/${postId}/comments`, {
-      content,
-    });
-    setContent("");
+    try {
+      event.preventDefault();
+      await axios.post(`http://localhost:4001/posts/${postId}/comments`, {
+        content,
+      });
+      setContent("");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
