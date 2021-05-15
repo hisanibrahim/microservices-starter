@@ -37,5 +37,6 @@ app.post("/events", (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
+  console.log("Version 1.2.3");
   console.log(`Listening on ${process.env.PORT}`);
 });

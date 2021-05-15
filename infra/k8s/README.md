@@ -1,3 +1,17 @@
+# Updating Deployemt
+
+- After updating application code, update Deployment config if necessary
+
+`kubectl apply -f posts-deployment.yaml`
+
+`docker build . -t hisanibrahim/posts:0.0.1`
+
+`docker login`
+
+`docker push hisanibrahim/posts`
+
+`kubectl rollout restart deployment posts-deployment`
+
 # Creating Deployemt
 
 `posts-deployment.yaml`
