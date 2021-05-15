@@ -1,3 +1,35 @@
+# Creating Deployemt
+
+`posts-deployment.yaml`
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: posts
+  template:
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: hisanibrahim/posts:0.0.1
+```
+
+`kubectl apply -f posts-deployment.yaml`
+
+### Common commands
+
+`kubectl get deployments`
+`kubectl describe deployment posts-deployment`
+`kubectl delete deployment posts-deployment`
+
 # Creating Pod
 
 ## Connect your Docker CLI to the docker daemon inside the VM
