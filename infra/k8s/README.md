@@ -1,14 +1,57 @@
 # Creating Service
 
-## NodePort service
+## Adding ingress service
 
-`posts-service.yaml`
+`minikube addons enable ingress`
+
+```yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: posts.com
+      http:
+        paths:
+          - path: /posts
+            backend:
+              serviceName: posts-service
+              servicePort: 4000
+```
+
+`kubectl apply -f ingress/service.yaml`
+
+## ClusterIp service
 
 ```yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: posts-service
+spec:
+  selector:
+    app: posts
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+```
+
+- ClusterIp is the default service
+
+## NodePort service
+
+`posts-nodeport-service.yaml`
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-nodeport-service
 spec:
   type: NodePort
   selector:
@@ -20,7 +63,7 @@ spec:
       targetPort: 4000
 ```
 
-`kubectl apply -f posts-service.yaml`
+`kubectl apply -f posts-nodeport-service.yaml`
 
 ### Common commands
 
