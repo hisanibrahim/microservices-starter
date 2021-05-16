@@ -19,20 +19,20 @@ app.post("/events", (req, res) => {
     .then(() => console.log("Event emitted to 4000"))
     .catch(() => console.log("Problem in emitting event to 4000"));
 
-  // axios
-  //   .post("http://localhost:4001/events", event)
-  //   .then(() => console.log("Event emitted to 4001"))
-  //   .catch(() => console.log("Problem in emitting event to 4001"));
+  axios
+    .post("http://comments-service:4001/events", event)
+    .then(() => console.log("Event emitted to 4001"))
+    .catch(() => console.log("Problem in emitting event to 4001"));
 
-  // axios
-  //   .post("http://localhost:4002/events", event)
-  //   .then(() => console.log("Event emitted to 4002"))
-  //   .catch(() => console.log("Problem in emitting event to 4002"));
+  axios
+    .post("http://query-service:4002/events", event)
+    .then(() => console.log("Event emitted to 4002"))
+    .catch(() => console.log("Problem in emitting event to 4002"));
 
-  // axios
-  //   .post("http://localhost:4003/events", event)
-  //   .then(() => console.log("Event emitted to 4003"))
-  //   .catch(() => console.log("Problem in emitting event to 4003"));
+  axios
+    .post("http://moderation-service:4003/events", event)
+    .then(() => console.log("Event emitted to 4003"))
+    .catch(() => console.log("Problem in emitting event to 4003"));
 
   res.send({ status: "OK" });
 });
