@@ -1,7 +1,9 @@
+## Running on Linux
+
 ### Requirments
 
-- Kubernetes
 - Docker
+- Kubernetes
 - Minikube
 - Skaffold
 
