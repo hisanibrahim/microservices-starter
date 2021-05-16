@@ -15,3 +15,17 @@ spec:
       containers:
         - name: moderation
           image: hisanibrahim/moderation
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderation-service
+spec:
+  selector:
+    app: moderation
+  ports:
+    - name: moderation
+      protocol: TCP
+      port: 4003
+      targetPort: 4003

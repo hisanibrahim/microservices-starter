@@ -15,3 +15,17 @@ spec:
       containers:
         - name: client
           image: hisanibrahim/client
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-service
+spec:
+  selector:
+    app: client
+  ports:
+    - name: client
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
