@@ -1,4 +1,34 @@
-# Updating Deployemt
+# Creating Service
+
+## NodePort service
+
+`posts-service.yaml`
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-service
+spec:
+  type: NodePort
+  selector:
+    app: posts
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+```
+
+`kubectl apply -f posts-service.yaml`
+
+### Common commands
+
+`kubectl get services`
+`kubectl describe service posts-service`
+`kubectl delete service posts-service`
+
+# Updating Deployment
 
 - After updating application code, update Deployment config if necessary
 
